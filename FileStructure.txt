@@ -1,0 +1,52 @@
+common
+======
+
+Files in here are never called directly by the client, and are instead included by scripts
+
+root
+====
+
+index.php
+---------
+
+The dashboard. Handles all user ranks
+
+login.php
+---------
+
+Allows the user to enter their log in details, and then authenticates them.
+
+logout.php
+----------
+
+Deletes the user's cookie and logs them out.
+
+take.php
+--------
+
+The test player. Allows the pupil to take the test. Marks and submits the results.
+
+test.php
+--------
+
+Views the details for a test, including the submissions.
+
+tests.php
+---------
+
+Shows a searchable list of tests.
+
+users.php
+---------
+
+Shows a searchable list of users.
+
+profile.php
+-----------
+
+Shows a user's profile. Allows passwords to be set.
+
+unit.php
+--------
+
+A testing script that test functions based on their output
