@@ -113,14 +113,14 @@ $level = ($level==NULL) ? "" : $level;
 			style="width:128px;";
 			text-align: center;
 		}
-		.resultTable{
+		.resultTable, #testlist{
 			border: 1px solid black;
 			width: 100%;
 		}
 		.resultTable th:first-of-type{
 			width: 92px;
 		}
-		.resultTable td,.resultTable th{
+		.resultTable td,.resultTable th,#testlist td,#testlist th{
 			padding: 3px 1em 3px 1em;
 			border: 1px solid black;
 			text-align: center;
@@ -145,8 +145,8 @@ $level = ($level==NULL) ? "" : $level;
 								echo "\t\t\t\t\t<li><a href=\"{$level}report.php\">My Report</a></li>\n";
 							else if ($current_user->isStaff()){
 								echo "\t\t\t\t\t<li><a href=\"{$level}users.php\">Users</a></li>\n";
-								echo "\t\t\t\t\t<li><a href=\"{$level}test\">Tests</a></li>\n";
 							}
+							echo "\t\t\t\t\t<li><a href=\"{$level}test\">Tests</a></li>\n";
 							echo "\t\t\t\t\t<li><a href=\"{$level}profile.php?id={$current_user->id}\">Profile</a></li>\n";
 						}
 					?>

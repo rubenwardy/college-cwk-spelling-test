@@ -79,7 +79,7 @@ class Score {
 		}
 	}
 	
-	// Get a score by their testID and userID
+	// Get a score by their scoreID
 	public static function get($id){
 		global $handle;
 		
@@ -122,6 +122,13 @@ class Score {
 			array_push($result,new Score($obj));
 		}
 		return $result;
+	}
+	
+	// Get all scores for user and test
+	public static function getfromusertest($userID,$testID){
+		if (!is_numeric($userID) || !is_numeric($testID))
+			return null;
+		return Score::_search("WHERE userID = $userID AND testID = $testID");
 	}
 	
 	// Get all scores

@@ -28,7 +28,7 @@ showHeader("Test Search");
 
 echo "<h1>Tests</h1>\n";
 
-if ($author != $current_user->id){
+if ($author != $current_user->id && $current_user->isStaff()){
 	echo "<a class=\"button\" href=\"?user={$current_user->id}\">My Tests</a><br><br>\n";
 }
 
@@ -40,7 +40,17 @@ foreach ($tests as $t){
 		//TODO
 	}
 	
-	echo "<tr><td style=\"width: 60%;\">{$t->title}</td><td><a href=\"edit.php?id={$t->id}\" class=\"button\">Edit</a> <a href=\"view.php?id={$t->id}\" class=\"button\">View Submissions</a></td></tr>\n";
+	echo "<tr><td style=\"width: 60%;\">{$t->title}</td><td>";
+	if ($current_user->isStaff())
+		echo "<a href=\"edit.php?id={$t->id}\" class=\"button\">Edit</a> ";
+	else{
+		$res = Score::getfromusertest($current_user->id,$t->id);
+		if (!$res || count($res)==0)
+			echo "<a href=\"take.php?id={$t->id}\" class=\"button\">Take</a> ";
+		else
+			echo "<a href=\"take.php?id={$t->id}\" class=\"button\">Retake</a> ";
+	}
+	echo "<a href=\"view.php?id={$t->id}\" class=\"button\">View Submissions</a></td></tr>\n";
 }
 
 echo "</table>\n";

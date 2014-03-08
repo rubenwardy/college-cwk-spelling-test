@@ -21,7 +21,15 @@ if ($current_user->isPupil()){
 	$ass = $current_user->tests();
 	
 	foreach ($ass as $a){
-		echo "<tr><td>".$a->test()->title."</td><td class=\"take\"><a href=\"".burl("test/take.php?id=".$a->test()->id)."\">Take</a></td></tr>";
+		$res = Score::getfromusertest($current_user->id,$a->testID);
+		echo "<tr><td>".$a->test()->title."</td><td class=\"take\" style=\"width:120px;\">";
+		
+		if (!$res || count($res)==0)
+			echo "<a class=\"button\" href=\"".burl("test/take.php?id=".$a->test()->id)."\">Take</a>";
+		else
+			echo "<a class=\"button\" href=\"".burl("test/take.php?id=".$a->test()->id)."\">Retake</a>";
+			
+		echo "</td></tr>";
 	}
 }else if ($current_user->isStaff()){
 ?>
