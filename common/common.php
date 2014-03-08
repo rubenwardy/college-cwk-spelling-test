@@ -1,4 +1,11 @@
 <?php
+// The root url
+$root_url = "http://spell.rubenwardy.kd.io/";
+
+function burl($page){
+	return $root_url.$page;
+}
+
 // Shows the web page to the user, with a title
 function showHeader($title){
 	include("template/header.php");

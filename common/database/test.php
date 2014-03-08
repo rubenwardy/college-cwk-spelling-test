@@ -65,9 +65,9 @@ class Test {
 			}
 			
 			// Update each field using the function above
-			update($this->id,"title",$this->username,false);
-			update($this->id,"userID",$this->firstname,true);
-			update($this->id,"datecreated",$this->surname,false);
+			update($this->id,"title",$this->title,false);
+			update($this->id,"userID",$this->userID,true);
+			update($this->id,"datecreated",$this->datecreated,false);
 		}
 	}
 	

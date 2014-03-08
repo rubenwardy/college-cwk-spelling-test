@@ -26,4 +26,9 @@ showHeader("Log in");
 	Username: <input type="test" name="username"><br>
 	Password: <input type="password" name="password"><br>
 	<input type="submit" value="Log in">
+	
+	<p>
+		<b>Admin account:</b> aw / pass<br>
+		<b>Pupil account:</b> to / pass
+	</p>
 </form>

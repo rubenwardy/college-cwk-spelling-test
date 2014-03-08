@@ -58,7 +58,7 @@ if ($_POST['submitted']=="true"){
 	
 	$scores->score = $count;
 	$scores->save();
-	header("location: test.php?id={$test->id}&user={$current_user->id}");
+	header("location: view.php?id={$test->id}&user={$current_user->id}");
 	die("");
 }
 
