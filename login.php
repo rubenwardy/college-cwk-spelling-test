@@ -12,7 +12,6 @@ if ($_POST['submitted']=="true"){
 	}
 }
 
-//msgscrn("Log in","<a href=\"login.php?l=1\">Log in</a>","","");
 showHeader("Log in");
 ?>
 <form action="login.php" method="post">
@@ -28,7 +27,12 @@ showHeader("Log in");
 	<input type="submit" value="Log in">
 	
 	<p>
-		<b>Admin account:</b> aw / pass<br>
-		<b>Pupil account:</b> to / pass
+		<b>Admins:</b> aw<br />
+		<b>Staff:</b> ad<br />
+		<b>Pupils:</b> to, rt, mp
+		
+		<p>
+			<b>Password:</b> pass
+		</p>
 	</p>
 </form>

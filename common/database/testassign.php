@@ -35,7 +35,7 @@ class TestAssign {
 		global $handle;
 		if ($this->id == -1){
 			// Create SQL query
-			$h = $handle->prepare("INSERT INTO testassign(testID,year,group) VALUES (?,?,?,?)")  or die("SQL Prepare: ".mysqli_error($handle));
+			$h = $handle->prepare("INSERT INTO testassign(testID,year,ugroup) VALUES (?,?,?)")  or die("SQL Prepare: ".mysqli_error($handle));
 			$h->bind_param('iis',$this->testID,$this->year,$this->group) or die("SQL Param: ".mysqli_error($handle));
 			
 			// Insert the new record into the table

@@ -3,6 +3,7 @@
 $root_url = "http://spell.rubenwardy.kd.io/";
 
 function burl($page){
+	global $root_url;
 	return $root_url.$page;
 }
 
@@ -17,10 +18,11 @@ function msgscrn($msg,$text,$more,$buttons){
 	echo "<h1>$msg</h1>\n";
 	echo $text;
 	
+	// Add buttons
 	if ($buttons){
 		if ($buttons == "rc"){
 			echo "<p><a class=\"button\" href=\"//".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."\">Retry</a>";
-			echo "<a class=\"button\" href=\"index.php\">Cancel</a>";
+			echo "<a class=\"button\" href=\"".burl("")."\">Cancel</a>";
 		}else if ($buttons->type == "yn"){
 			echo "<p><a class=\"button\" href=\"".$buttons->yes."\">Yes</a>";
 			echo "<a class=\"button\" href=\"".$buttons->no."\">No</a>";
@@ -32,10 +34,12 @@ function msgscrn($msg,$text,$more,$buttons){
 		}
 	}
 	
+	// Add more stuff text box
 	if ($more){
 		echo "<div class=\"code\">$more</div>";
 	}
 	
+	// Exit
 	die ("");
 }
 
@@ -47,12 +51,14 @@ function auth($level){
 	global $current_user;
 	if (!$current_user || $current_user->rank < $level){
 		if ($current_user->rank >= AUTH_PUPIL){
-			msgscrn("Access Denied","You do not have the authority to do this.<br>Try logging in with ".getAuthLabel($level)." privileges.<p><a class=\"button\" href=\"logout.php\">Log Out</a></p>","","");
+			msgscrn("Access Denied","You do not have the authority to do this.<br>Try logging in with ".getAuthLabel($level)." privileges.<p><a class=\"button\" href=\"".burl("logout.php")."\">Log Out</a></p>","","");
 		}
 		header("location: /login.php?id=$level");
 		die("");
 	}
 }
+
+// Return a string describing the given rank level
 function getAuthLabel($level){
 	if ($level == AUTH_PUPIL)
 		return "pupil";

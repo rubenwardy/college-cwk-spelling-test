@@ -141,7 +141,7 @@ Nearwords: <?php echo $nw;?>
 }
 }else{
 ?>
-
+<a href="assign.php?id=<?php echo $test->id;?>">Assign test to pupils</a><br>
 <fieldset>
 <legend>Test Properties</legend>
 
@@ -176,7 +176,7 @@ Nearwords: <input type="text" size="60" name="nearword" /><br>
 <table style="margin-top: 30px;">
 <tr><th>Answer</th><th>Definition</th><th>Near words</th><th></th></tr>
 <?php
-	// Output row
+	// Output table row
 	function orow($word,$def,$near,$wid){
 		global $test;
 		echo "<tr><td style=\"width: 10%;\">$word</td><td style=\"width: 40%;\">$def</td><td style=\"width: 30%;\">$near</td><td><a style=\"width: 20%;\" href=\"edit.php?id={$test->id}&mode=ew&word=$wid\" class=\"button\">Edit</a> <a href=\"edit.php?id={$test->id}&mode=dw&word=$wid\" class=\"button\">Delete</a></td></tr>\n";

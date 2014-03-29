@@ -45,6 +45,7 @@ try{
 	$user->username = "testx";
 	$user->firstname = "first";
 	$user->surname = "last";
+	$user->password = "1a1dc91c907325c69271ddf0c944bc72";
 	$user->year = 5;
 	$user->group = "a";
 	$user->rank = 1;
@@ -69,7 +70,7 @@ echo "Test get by id: ";
 try{
 	$test = Test::get(1);
 	
-	if ($test && $test->title == "Test One")
+	if ($test && $test->title == "Vegetables")
 		echo "Passed.<br>\n";
 	else
 		echo "Failed.<br>\n";

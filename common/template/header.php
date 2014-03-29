@@ -130,6 +130,8 @@ $level = ($level==NULL) ? "" : $level;
 		{
 			border-collapse:collapse;
 		}
+		.tblStripe tr:nth-child(odd){ background-color:#ffeebb; }
+		.tblStripe tr:nth-child(even){ background-color:#ffffff; }
 	</style>
 </head>
 <body>
@@ -141,12 +143,14 @@ $level = ($level==NULL) ? "" : $level;
 						// Show the user's navbar
 						if ($current_user){
 							echo "<li><a href=\"".$level."index.php\">Dashboard</a></li>\n";
-							if ($current_user->isPupil())
+							if ($current_user->isPupil()){
 								echo "\t\t\t\t\t<li><a href=\"{$level}report.php\">My Report</a></li>\n";
-							else if ($current_user->isStaff()){
+								echo "\t\t\t\t\t<li><a href=\"{$level}test\">Tests</a></li>\n";
+							}else if ($current_user->isStaff()){
 								echo "\t\t\t\t\t<li><a href=\"{$level}users.php\">Users</a></li>\n";
+								echo "\t\t\t\t\t<li><a href=\"{$level}test\">Tests</a></li>\n";
+								echo "\t\t\t\t\t<li><a href=\"{$level}test/add.php\">Add Test</a></li>\n";
 							}
-							echo "\t\t\t\t\t<li><a href=\"{$level}test\">Tests</a></li>\n";
 							echo "\t\t\t\t\t<li><a href=\"{$level}profile.php?id={$current_user->id}\">Profile</a></li>\n";
 						}
 					?>

@@ -7,8 +7,6 @@ auth(AUTH_PUPIL);
 
 // Get search critera
 $author = $_GET['user'];
-$group = null;
-$year = null;
 
 // Do validation
 if (($author!=null && !is_numeric($author)) || ($year!=null &&!is_numeric($year)))
@@ -28,19 +26,28 @@ showHeader("Test Search");
 
 echo "<h1>Tests</h1>\n";
 
-if ($author != $current_user->id && $current_user->isStaff()){
-	echo "<a class=\"button\" href=\"?user={$current_user->id}\">My Tests</a><br><br>\n";
+// Show buttons for staff members
+if ($current_user->isStaff()){
+	// Create a test button
+	echo "<a class=\"button\" href=\"add.php\">Create</a>\n";
+	
+	// Filter by my tests button
+	if ($author != $current_user->id)
+		echo "<a class=\"button\" href=\"?user={$current_user->id}\">My Tests</a>\n";
+		
+	// Spacing
+	echo "<br /><br />";
 }
 
+// Start table
 echo "<table class=\"resultTable\"><tr><th>Name</th><th>Controls</th></tr>\n";
 
+// Loop through tests with applied filters
 foreach ($tests as $t){
-	// Apply additional filters
-	if ($year!=null || $group!=null){
-		//TODO
-	}
-	
+	// Test details
 	echo "<tr><td style=\"width: 60%;\">{$t->title}</td><td>";
+	
+	// Buttons
 	if ($current_user->isStaff())
 		echo "<a href=\"edit.php?id={$t->id}\" class=\"button\">Edit</a> ";
 	else{
@@ -53,4 +60,5 @@ foreach ($tests as $t){
 	echo "<a href=\"view.php?id={$t->id}\" class=\"button\">View Submissions</a></td></tr>\n";
 }
 
+// End table
 echo "</table>\n";

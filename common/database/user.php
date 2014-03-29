@@ -47,7 +47,7 @@ class User {
 		global $handle;
 		if ($this->id == -1){
 			// Create SQL query
-			$h = $handle->prepare("INSERT INTO user(username,password,firstname,surname,year,ugroup,rank) VALUES (?, ?, ?, ?, ?, ?)")  or die("SQL Prepare: ".mysqli_error($handle));
+			$h = $handle->prepare("INSERT INTO user(username,password,firstname,surname,year,ugroup,rank) VALUES (?, ?, ?, ?, ?, ?, ?)")  or die("SQL Prepare: ".mysqli_error($handle));
 			$h->bind_param('ssssisi',$this->username,$this->password,$this->firstname,$this->surname,$this->year,$this->group,$this->rank) or die("SQL Param: ".mysqli_error($handle));
 			
 			// Insert the new record into the table
@@ -132,7 +132,7 @@ class User {
 	}
 	
 	public function tests(){
-		return TestAssign::_search("WHERE year = {$this->year} OR ugroup = '{$this->group}'");
+		return TestAssign::_search("WHERE year = {$this->year} OR year = -1 OR ugroup = '{$this->group}' ORDER BY assignID DESC");
 	}
 	
 	// Get a user by their username

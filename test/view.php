@@ -30,7 +30,7 @@ echo "</p>";
 // Show user test submissions
 if ($current_user->rank == 1 || $_GET['user']){
 	$search_id = ($current_user->rank == 1) ? $current_user->id : $_GET['user'];
-	$me = Score::_search("WHERE userID = $search_id AND testID = {$test->id}");
+	$me = Score::_search("WHERE userID = $search_id AND testID = {$test->id} ORDER BY scoreID desc");
 	if (count($me)<1){
 		echo ($search_id == $current_user->id) ? "You have not taken this test yet.":"The pupil has not taken this test yet.";
 		if($current_user->rank > 1)
@@ -38,6 +38,17 @@ if ($current_user->rank == 1 || $_GET['user']){
 		else
 			echo "<p><a href=\"take.php?id={$test->id}\" class=\"button\">Take test</a></p>";
 	}else{
+		echo "<p>Each row in this table is an attempt at the test. The latest attempt is at the top</p>";
+		if ($_GET['latest']==1){
+			?>
+			<style>
+				.resultTable tr:nth-child(2){
+					background: yellow;
+				}
+			</style>
+			<p>The row marked in yellow was the latest test.</p>
+			<?php
+		}
 		echo "<table class=\"resultTable\">";
 		echo "<tr><th>Score</th><th>Incorrect words</th></tr>";
 		foreach($me as $s){
@@ -62,9 +73,11 @@ if ($current_user->rank == 1 || $_GET['user']){
 		echo "</table>";
 		
 		if($current_user->rank > 1)
-			echo "<p><a href=\"view.php?id={$test->id}\" class=\"button\">Back</a></p>";
+			echo "<p><a href=\"view.php?id={$test->id}\" class=\"button\">Back</a>";
 		else
-			echo "<p><a href=\"take.php?id={$test->id}\" class=\"button\">Retake test</a></p>";
+			echo "<p><a href=\"take.php?id={$test->id}\" class=\"button\">Retake test</a>";
+			
+		echo "<a href=\"../report.php?id=$search_id\" class=\"button\">View Report</a></p>";
 	}
 }else if($current_user->rank > 1){
 	$users = $test->users();

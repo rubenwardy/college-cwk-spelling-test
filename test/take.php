@@ -58,7 +58,7 @@ if ($_POST['submitted']=="true"){
 	
 	$scores->score = $count;
 	$scores->save();
-	header("location: view.php?id={$test->id}&user={$current_user->id}");
+	header("location: view.php?id={$test->id}&user={$current_user->id}&latest=1");
 	die("");
 }
 
@@ -76,7 +76,7 @@ echo "</p>";
 ?>
 <form action="take.php?id=<?php echo $_GET['id'];?>" method="post">
 <input type="hidden" name="submitted" value="true" />
-<table>
+<table class="tblStripe">
 
 <?php
 foreach ($words as $w){

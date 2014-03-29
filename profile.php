@@ -32,7 +32,11 @@ prof("Username", $user->username);
 prof("Year", $user->year);
 prof("Group", $user->group);
 
+echo "<p>";
 if ($user->id == $current_user->id || $current_user->isAdmin())
-	echo "<p><a class=\"button\" href=\"profile.php?id={$user->id}&edit=1\">Edit</a></p>";
+	echo "<a class=\"button\" href=\"profile.php?id={$user->id}&edit=1\">Edit</a>";
+if ($user->isPupil())
+	echo " <a class=\"button\" href=\"report.php?id={$user->id}\">View Report</a>";
+echo "</p>";
 
 ?>

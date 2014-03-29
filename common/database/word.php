@@ -128,6 +128,6 @@ class Word {
 	
 	// Get all tests
 	public static function all(){
-		return Test::_search("");
+		return Word::_search("");
 	}
 }

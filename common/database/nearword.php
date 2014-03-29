@@ -114,6 +114,6 @@ class Nearword {
 	
 	// Get all tests
 	public static function all(){
-		return Test::_search("");
+		return Nearword::_search("");
 	}
 }

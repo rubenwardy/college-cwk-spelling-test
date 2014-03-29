@@ -1,5 +1,6 @@
 <?php
 class WrongWord {
+	public $id = null;
 	public $scoreID = null;
 	public $wordID = null;
 	public $word = null;
