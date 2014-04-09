@@ -64,7 +64,7 @@ function getAuthLabel($level){
 		return "pupil";
 	else if ($level == AUTH_STAFF)
 		return "staff";
-	else if ($level == AUTH_STAFF)
+	else if ($level == AUTH_ADMIN)
 		return "admin";
 	else
 		return "lvl($level)";

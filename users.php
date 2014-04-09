@@ -12,16 +12,18 @@ $rank = $_GET['rank'];
 if (($year!=null && !is_numeric($year)) || ($rank!=null && !is_numeric($rank)))
 	msgscrn("Query blocked","Your search terms are invalid.","","");
 
-$q = "";
+$query = "";
 
+// Add surname filter to query
 if ($surname)
-	$q .= "surname LIKE '$surname'";	
+	$query .= "surname LIKE '$surname'";	
 
+// Add rank filter to query
 if ($rank)
-	$q .= (($q!="")?" AND ":"") . "rank = $rank"; // The ? here adds ' AND ' if there was a previous condition
+	$query .= (($query!="")?" AND ":"") . "rank = $rank"; // The ? here adds ' AND ' if there was a previous condition
 
 // Get tests
-$users = User::_search( ($q!="")? "WHERE $q" : "" ); // The ? here adds 'WHERE' if there is a query
+$users = User::_search( ($query!="")? "WHERE $query" : "" ); // The ? here adds 'WHERE' if there is a query
 
 // Show test player page
 showHeader("User Search");
@@ -40,8 +42,10 @@ echo "</select><br>\n";
 echo "<input type=\"submit\" value=\"Filter\">";
 echo "</fieldset></form><br>\n";
 
+// Display table head
 echo "<table class=\"resultTable\"><tr><th width=\"50%\">Name</th><th style=\"width: 10%;\">Year</th><th style=\"width:10%;\">Group</th><th style=\"width:30%;\">Controls</th></tr>\n";
 
+// Loop through users
 foreach ($users as $u){
 	echo "<tr><td>{$u->surname}, {$u->firstname}</td><td>{$u->year}</td><td>{$u->group}</td><td><a href=\"profile.php?id={$u->id}\" class=\"button\">Profile</a></td></tr>\n";
 }

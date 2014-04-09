@@ -42,6 +42,26 @@ class User {
 		return "{$res}";
 	}
 	
+	// Update existing record
+	private function update($id, $col, $value, $int=false){
+		// Update a field in an existing record
+		global $handle;
+		$res = "";
+		if ($int){
+			// Update integer field
+			if (!is_numeric($value)){
+				echo "<p>inputed value is not numeric! ($id, $col, $value, $int) </p>";
+				return;
+			}
+			$res = "UPDATE user SET $col = $value WHERE userID = $id";
+		}else{
+			// Update string field
+			$res = "UPDATE user SET $col = '$value' WHERE userID = $id";
+		}
+		// Run update query
+		$handle->query($res) or die("<br><br>Query Error: ".mysqli_error($handle));
+	}
+	
 	// Save the record
 	public function save(){
 		global $handle;
@@ -55,35 +75,14 @@ class User {
 			$h->close();
 			$this->id = $handle->insert_id;
 		}else{
-			// Update existing record
-			function update($id, $col, $value, $int=false){
-				// Update a field in an existing record
-				global $handle;
-				$res = "";
-				if ($int){
-					// Update integer field
-					if (!is_numeric($value)){
-						echo "<p>inputed value is not numeric! ($id, $col, $value, $int) </p>";
-						return;
-					}
-					$res = "UPDATE user SET $col = $value WHERE userID = $id";
-				}else{
-					// Update string field
-					$res = "UPDATE user SET $col = '$value' WHERE userID = $id";
-				}
-
-				// Run update query
-				$handle->query($res) or die("<br><br>Query Error: ".mysqli_error($handle));
-			}
-			
 			// Update each field using the function above
-			update($this->id,"username",$this->username,false);
-			update($this->id,"password",$this->password,false);
-			update($this->id,"firstname",$this->firstname,false);
-			update($this->id,"surname",$this->surname,false);
-			update($this->id,"year",$this->year,true);
-			update($this->id,"ugroup",$this->group,false);
-			update($this->id,"rank",$this->rank,true);
+			$this->update($this->id,"username",$this->username,false);
+			$this->update($this->id,"password",$this->password,false);
+			$this->update($this->id,"firstname",$this->firstname,false);
+			$this->update($this->id,"surname",$this->surname,false);
+			$this->update($this->id,"year",$this->year,true);
+			$this->update($this->id,"ugroup",$this->group,false);
+			$this->update($this->id,"rank",$this->rank,true);
 		}
 	}
 	
