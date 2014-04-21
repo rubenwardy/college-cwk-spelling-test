@@ -26,19 +26,19 @@ if ($_GET['mode']=="prop" && isset($_POST['title']) && $_POST['title']!=""){
 			$_POST['def']!=""
 		){
 	// Add a new word
-	$w = new Word(null);
-	$w->testID = $test->id;
-	$w->word = $_POST['word'];
-	$w->def = $_POST['def'];
-	$w->save();
+	$newword = new Word(null);
+	$newword->testID = $test->id;
+	$newword->word = $_POST['word'];
+	$newword->def = $_POST['def'];
+	$newword->save();
 	
 	// Split near word field into elements
-	$nws = explode(',', $_POST['nearword']);
-	foreach ($nws as $nw){
-		$nearword_word = trim($nw);
+	$nearwords = explode(',', $_POST['nearword']);
+	foreach ($nearwords as $near){
+		$nearword_word = trim($near);
 		if ($nearword_word){
 			$nearword = new Nearword(null);
-			$nearword->wordID = $w->id;
+			$nearword->wordID = $newword->id;
 			$nearword->word = $nearword_word;
 			$nearword->save();
 		}
@@ -177,15 +177,15 @@ Nearwords: <input type="text" size="60" name="nearword" /><br>
 <tr><th>Answer</th><th>Definition</th><th>Near words</th><th></th></tr>
 <?php
 	// Output table row
-	function orow($word,$def,$near,$wid){
+	function orow($word,$def,$near,$wordid){
 		global $test;
-		echo "<tr><td style=\"width: 10%;\">$word</td><td style=\"width: 40%;\">$def</td><td style=\"width: 30%;\">$near</td><td><a style=\"width: 20%;\" href=\"edit.php?id={$test->id}&mode=ew&word=$wid\" class=\"button\">Edit</a> <a href=\"edit.php?id={$test->id}&mode=dw&word=$wid\" class=\"button\">Delete</a></td></tr>\n";
+		echo "<tr><td style=\"width: 10%;\">$word</td><td style=\"width: 40%;\">$def</td><td style=\"width: 30%;\">$near</td><td><a style=\"width: 20%;\" href=\"edit.php?id={$test->id}&mode=ew&word=$wordid\" class=\"button\">Edit</a> <a href=\"edit.php?id={$test->id}&mode=dw&word=$wordid\" class=\"button\">Delete</a></td></tr>\n";
 	}
 	$words = $test->words();
 	foreach ($words as $w){
 		$nw = "";
-		$list = $w->nearwords();
-		foreach ($list as $n){
+		$nearwords = $w->nearwords();
+		foreach ($nearwords as $n){
 			// Add near word to list
 			$nw .= (($nw=="")?"":", ")."{$n->word}";
 		}

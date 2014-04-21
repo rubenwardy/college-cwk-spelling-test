@@ -1,6 +1,6 @@
 <?php
 // The root url
-$root_url = "http://spell.rubenwardy.kd.io/";
+$root_url = "http://rubenwardy.kd.io/spelling/";
 
 function burl($page){
 	global $root_url;
@@ -53,7 +53,7 @@ function auth($level){
 		if ($current_user->rank >= AUTH_PUPIL){
 			msgscrn("Access Denied","You do not have the authority to do this.<br>Try logging in with ".getAuthLabel($level)." privileges.<p><a class=\"button\" href=\"".burl("logout.php")."\">Log Out</a></p>","","");
 		}
-		header("location: /login.php?id=$level");
+		header("location: ".burl("login.php?id=$level"));
 		die("");
 	}
 }

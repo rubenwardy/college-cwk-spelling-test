@@ -37,11 +37,11 @@ if ($_POST['submitted']=="true"){
 			$count += 2;
 		}else{
 			// Enter as wrong
-			$ww = new WrongWord(null);
-			$ww->wordID = $w->id;
-			$ww->scoreID = $scores->id;
-			$ww->word = $guess;
-			$ww->save();
+			$wrongword = new WrongWord(null);
+			$wrongword->wordID = $w->id;
+			$wrongword->scoreID = $scores->id;
+			$wrongword->word = $guess;
+			$wrongword->save();
 			
 			// Pupil got the word wrong, check for nearwords
 			$near = $w->nearwords();

@@ -6,6 +6,14 @@ require "common/common.php";
 auth(AUTH_ADMIN);
 
 if ($_GET['id']=="user"){
+	if (strlen($_POST['username']) > 25)
+		msgscrn("Username too long","Unable to create that user because the username was too long.");
+	if (strlen($_POST['first']) > 30)
+		msgscrn("Firstname too long","Unable to create that user because the first name was too long.");
+	if (strlen($_POST['sur']) > 30)
+		msgscrn("Surname too long","Unable to create that user because the surname was too long.");
+		
+		
 	$user = new User(null);
 	$user->username = $_POST['username'];
 	$user->firstname = $_POST['first'];
